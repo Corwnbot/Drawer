@@ -1,5 +1,5 @@
 const { Client, GatewayIntentBits, REST, Routes, SlashCommandBuilder } = require('discord.js');
-const axios = require('axios');  // Make sure to use axios@latest or a specific stable version
+const axios = require('axios');
 const express = require('express');
 const path = require('path');
 
@@ -28,7 +28,7 @@ const rest = new REST({ version: '10' }).setToken(process.env.DISCORD_TOKEN);
 
         console.log('Successfully reloaded application (/) commands.');
     } catch (error) {
-        console.error(error);
+        console.error('Error registering slash commands:', error);
     }
 })();
 
@@ -52,7 +52,8 @@ client.on('interactionCreate', async interaction => {
                 size: "1024x1024"
             }, {
                 headers: {
-                    'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`
+                    'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+                    'Content-Type': 'application/json'
                 }
             });
 
@@ -60,7 +61,18 @@ client.on('interactionCreate', async interaction => {
             await interaction.reply(`Here is your drawing: ${imageUrl}`);
         } catch (error) {
             console.error('Error generating image:', error);
-            await interaction.reply('Sorry, something went wrong while generating the image.');
+            if (error.response) {
+                console.error('Response data:', error.response.data);
+                console.error('Response status:', error.response.status);
+                console.error('Response headers:', error.response.headers);
+                await interaction.reply(`Error generating image: ${error.response.data.error.message}`);
+            } else if (error.request) {
+                console.error('No response received:', error.request);
+                await interaction.reply('No response received from the API.');
+            } else {
+                console.error('Error setting up the request:', error.message);
+                await interaction.reply('Error setting up the request.');
+            }
         }
     }
 });
