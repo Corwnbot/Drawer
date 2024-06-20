@@ -2,9 +2,9 @@
   "name": "glitch-mvp-node",
   "version": "0.1.0",
   "description": "A simple Node app built on fastify, instantly up and running.",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node index.js"
   },
   "dependencies": {
     "fastify": "^4.21.0",
@@ -18,10 +18,10 @@
     "discord-rpc": "^4.0.1",
     "fs": "0.0.1-security",
     "discord.js": "^14.0.0",
-    "axios": "^1.4.0"
+    "axios": "^1.6.8"
   },
   "engines": {
-    "node": "18.0"
+    "node": "v22.1.0"
   },
   "repository": {
     "url": "https://glitch.com/edit/#!/glitch-mvp-node"
