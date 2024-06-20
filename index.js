@@ -1,7 +1,7 @@
 const { Client, GatewayIntentBits, REST, Routes, SlashCommandBuilder, ActivityType } = require('discord.js');
 const axios = require('axios');
 
-const DISCORD_TOKEN = 'MTI1MTg4ODAzOTk0MTM3NDA4NA.GcNUpP.h9jfly_m8Rya3iI9dBk8c4G_Cy2wf6iN9Bngik';
+const DISCORD_TOKEN = process.env.t;
 const ATERNOS_USERNAME = 'akarbahr';
 const ATERNOS_PASSWORD = 'akar2009';
 const SERVER_ID = '9BDnDob0KOmrbSVG'
