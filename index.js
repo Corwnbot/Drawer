@@ -1,5 +1,6 @@
 const { Client, GatewayIntentBits, REST, Routes, SlashCommandBuilder, ActivityType } = require('discord.js');
 const axios = require('axios');
+const qs = require('qs');
 
 const DISCORD_TOKEN = process.env.t;
 const ATERNOS_USERNAME = 'akarbahr';
@@ -16,7 +17,7 @@ async function aternosLogin() {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     });
 
-    const response = await session.post('/account/login.php', new URLSearchParams({
+    const response = await session.post('/account/login.php', qs.stringify({
         user: ATERNOS_USERNAME,
         password: ATERNOS_PASSWORD
     }));
@@ -29,11 +30,17 @@ async function aternosLogin() {
 }
 
 async function startServer(session) {
-    await session.get(`/start.php?server=${SERVER_ID}`);
+    const response = await session.get(`/start.php?server=${SERVER_ID}`);
+    if (response.status !== 200) {
+        throw new Error('Failed to start server');
+    }
 }
 
 async function stopServer(session) {
-    await session.get(`/stop.php?server=${SERVER_ID}`);
+    const response = await session.get(`/stop.php?server=${SERVER_ID}`);
+    if (response.status !== 200) {
+        throw new Error('Failed to stop server');
+    }
 }
 
 async function restartServer(session) {
@@ -43,13 +50,15 @@ async function restartServer(session) {
 
 async function getServerStatus(session) {
     const statusResponse = await session.get(`/status.php?server=${SERVER_ID}`);
+    if (statusResponse.status !== 200) {
+        throw new Error('Failed to get server status');
+    }
     return statusResponse.data;
 }
 
 client.on('ready', async () => {
     console.log(`Logged in as ${client.user.tag}!`);
 
-    // Periodically check server status and update bot activity
     setInterval(async () => {
         try {
             const session = await aternosLogin();
