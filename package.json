@@ -18,7 +18,8 @@
     "discord-rpc": "^4.0.1",
     "fs": "0.0.1-security",
     "discord.js": "^14.0.0",
-    "axios": "^1.6.8"
+    "axios": "^1.6.8",
+    "qs": "^6.10.5"
   },
   "engines": {
     "node": "v22.1.0"
