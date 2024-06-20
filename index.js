@@ -22,7 +22,7 @@ async function startServer() {
         const response = await axios.post(url, params, { headers });
         return response.data;
     } catch (error) {
-        console.error(error);
+        console.error('Error starting server:', error.response ? error.response.data : error.message);
         return null;
     }
 }
@@ -39,7 +39,7 @@ async function stopServer() {
         const response = await axios.post(url, params, { headers });
         return response.data;
     } catch (error) {
-        console.error(error);
+        console.error('Error stopping server:', error.response ? error.response.data : error.message);
         return null;
     }
 }
