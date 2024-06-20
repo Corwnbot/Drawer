@@ -4,9 +4,9 @@ const axios = require('axios');
 const DISCORD_TOKEN = process.env.t;
 const ATERNOS_USERNAME = 'akarbahr';
 const ATERNOS_PASSWORD = 'akar2009';
-const SERVER_ID = '9BDnDob0KOmrbSVG'
+const SERVER_ID = '9BDnDob0KOmrbSVG';
 
-const OWNER_ROLE_NAME = 'Owner'; // Change this to your role name
+const OWNER_ROLE_ID = 'YOUR_OWNER_ROLE_ID'; // Change this to your role ID
 const TARGET_CHANNEL_ID = '1251488666686193779'; // Change this to your channel ID
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });
@@ -112,8 +112,7 @@ client.on('messageCreate', async (message) => {
         } catch (error) {
             await message.channel.send(`An error occurred: ${error.message}`);
         }
-    } else if ((command === 'stop' || command === 'restart') && member.roles.cache.some(role => role.name === OWNER_ROLE_NAME)) {
-    
+    } else if ((command === 'stop' || command === 'restart') && member.roles.cache.has(OWNER_ROLE_ID)) {
         try {
             const session = await aternosLogin();
             if (command === 'stop') {
@@ -147,8 +146,7 @@ client.on('interactionCreate', async (interaction) => {
         } catch (error) {
             await interaction.editReply(`An error occurred: ${error.message}`);
         }
-    } else if ((commandName === 'stop' || commandName === 'restart') && member.roles.cache.some(role => role.name === OWNER_ROLE_NAME)) {
-    
+    } else if ((commandName === 'stop' || commandName === 'restart') && member.roles.cache.has(OWNER_ROLE_ID)) {
         try {
             const session = await aternosLogin();
             if (commandName === 'stop') {
@@ -163,7 +161,7 @@ client.on('interactionCreate', async (interaction) => {
         } catch (error) {
             await interaction.editReply(`An error occurred: ${error.message}`);
         }
-    } else if (commandName === 'plugin' && member.user.id === interaction.guild.ownerId) {
+    } else if (commandName === 'plugin' && member.roles.cache.has(OWNER_ROLE_ID)) {
         try {
             const session = await aternosLogin();
 
