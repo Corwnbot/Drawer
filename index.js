@@ -6,7 +6,7 @@ const DISCORD_TOKEN = process.env.t;
 
 // Replace with your Aternos credentials
 const ATERNOS_SESSION = 'yWs5nOTUuKooMRkVVKMGY9BjWpChCqKdpYFGEVXyyLcCEH54qcZY3AvnZpbEjMAPCVwoczz1nnTU4RnVFTWwWCriIITBc2zHd6LD';
-const ATERNOS_SERVER = 'your-aternos-server-name';
+const ATERNOS_SERVER = '2zgC53kIbUdB4rHv';
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });
 
