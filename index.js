@@ -6,7 +6,7 @@ const ATERNOS_USERNAME = 'akarbahr';
 const ATERNOS_PASSWORD = 'akar2009';
 const SERVER_ID = '9BDnDob0KOmrbSVG';
 
-const OWNER_ROLE_ID = 'YOUR_OWNER_ROLE_ID'; // Change this to your role ID
+const OWNER_ROLE_ID = '1253242456783327325'; // Change this to your role ID
 const TARGET_CHANNEL_ID = '1251488666686193779'; // Change this to your channel ID
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });
